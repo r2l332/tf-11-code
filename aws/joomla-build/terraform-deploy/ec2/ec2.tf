@@ -1,15 +1,15 @@
 resource "aws_instance" "docker_web" {
-  ami = "${var.amis}"
+  ami           = "${var.amis}"
   instance_type = "${var.instance_type}"
   tags = {
     Name = "${var.ec2_name}"
   }
-  subnet_id = "${var.uat_public_1_id}"
+  subnet_id                   = "${var.uat_public_1_id}"
   associate_public_ip_address = true
-  vpc_security_group_ids = ["${var.customer_allow_ssh_id}"]
-  key_name = "${var.key_name}"
+  vpc_security_group_ids      = ["${var.customer_allow_ssh_id}"]
+  key_name                    = "${var.key_name}"
   provisioner "remote-exec" {
-    inline =  [
+    inline = [
       "sudo apt-get update",
       "sudo apt-get install -y git curl",
       "curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -",
@@ -23,16 +23,16 @@ resource "aws_instance" "docker_web" {
       "git clone https://github.com/r2l332/docker-tf-aws.git && cd docker-tf-aws && sudo systemctl start docker && sudo docker-compose up -d",
     ]
     connection {
-    type     = "ssh"
-    user     = "ubuntu"
-    private_key = "${file(var.private_key_path)}"
+      type        = "ssh"
+      user        = "ubuntu"
+      private_key = "${file(var.private_key_path)}"
     }
   }
 }
 
 resource "aws_eip" "docker_web" {
   instance = "${aws_instance.docker_web.id}"
-  vpc = true
+  vpc      = true
 }
 
 output "docker_web_id" {
