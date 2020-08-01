@@ -1,0 +1,14 @@
+variable "rds_engine" {}
+variable "rds_engine_version" {}
+variable "rds_instance_type" {}
+variable "rds_name" {}
+variable "dbusername" {}
+variable "dbpassword" {}
+variable "rds_backup_period" {}
+variable "rds_sg_id" {}
+variable "rds_id" {}
+variable "rds_sg_local_id" {}
+variable "customer_name" {}
+variable "skip_f_snap" {}
+variable "multi_az" {}
+variable "storage" {}

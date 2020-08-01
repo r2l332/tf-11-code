@@ -1,0 +1,10 @@
+variable "rds_engine" {}
+variable "rds_engine_version" {}
+variable "rds_instance_type" {}
+variable "rds_name" {}
+variable "dbusername" {}
+variable "dbpassword" {}
+variable "rds_backup_period" {}
+variable "rds_sg_id" {}
+variable "rds_sg_local_id" {}
+variable "uat_rds_id" {}

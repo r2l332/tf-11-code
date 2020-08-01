@@ -1,0 +1,82 @@
+[{
+		"name": "varnish",
+		"image": "",
+		"cpu": 5,
+		"memory": 512,
+		"essential": true,
+		"portMappings": [{
+			"containerPort": 6081
+		}],
+		"logConfiguration": {
+			"logDriver": "awslogs",
+			"options": {
+				"awslogs-group": "customer-prod-varnish",
+				"awslogs-region": "us-east-1",
+				"awslogs-stream-prefix": "customer-prod-var"
+			}
+		},
+		"hostname": "varnish",
+		"links": ["nginx"]
+	},
+	{
+		"name": "nginx",
+		"image": "",
+		"cpu": 5,
+		"memory": 512,
+		"essential": true,
+		"portMappings": [{
+			"containerPort": 8080
+		}],
+		"logConfiguration": {
+			"logDriver": "awslogs",
+			"options": {
+				"awslogs-group": "customer-prod-nginx",
+				"awslogs-region": "us-east-1",
+				"awslogs-stream-prefix": "customer-prod-ng"
+			}
+		},
+		"mountPoints": [{
+				"sourceVolume": "uploads",
+				"containerPath": "/media/uploads"
+			},
+			{
+				"sourceVolume": "droot",
+				"containerPath": "/var/www/html"
+			}
+		],
+		"hostname": "nginx",
+		"links": ["wordpress"]
+	},
+	{
+		"name": "wordpress",
+		"image": "",
+		"cpu": 10,
+		"memory": 512,
+		"essential": true,
+		"portMappings": [{
+			"containerPort": 9000
+		}],
+		"logConfiguration": {
+			"logDriver": "awslogs",
+			"options": {
+				"awslogs-group": "customer-prod-wordpress",
+				"awslogs-region": "us-east-1",
+				"awslogs-stream-prefix": "customer-prod-wp"
+			}
+		},
+		"mountPoints": [{
+				"sourceVolume": "uploads",
+				"containerPath": "/media/uploads"
+			},
+			{
+				"sourceVolume": "env",
+				"containerPath": "/mnt/env"
+			},
+			{
+				"sourceVolume": "droot",
+				"containerPath": "/var/www/html"
+			}
+		],
+		"hostname": "worpdress"
+	}
+]

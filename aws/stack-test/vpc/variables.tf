@@ -1,0 +1,10 @@
+variable "vpc_cidr" {}
+variable "public_snet_1_cidr" {}
+variable "public_snet_2_cidr" {}
+variable "region" {}
+variable "customer_vpc_id" {}
+variable "local-ips" {}
+variable "private_snet_1_cidr" {}
+variable "private_snet_2_cidr" {}
+variable "rds_sg" {}
+variable "rds_sg_local" {}
