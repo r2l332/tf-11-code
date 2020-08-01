@@ -1,0 +1,10 @@
+variable "customer_allow_ssh_id" {}
+#variable "customer_http_inbound_sg_id" {}
+variable "amis" {}
+variable "region" {}
+variable "uat_public_1_id" {}
+variable "uat_public_2_id" {}
+variable "instance_type" {}
+variable "private_key_path" {}
+variable "key_name" {}
+variable "ec2_name" {}
